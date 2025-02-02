@@ -8,12 +8,12 @@
 namespace Hex {
     class UiManager {
     public:
-      void Init();
-      void Update();
-      void Draw();
-      void Dispose();
-      void AddElement(std::shared_ptr<UiElement> element);
-      void Clear();
+      void init();
+      void update();
+      void draw();
+      void dispose();
+      void addElement(std::shared_ptr<UiElement> element);
+      void clear();
     private:
       std::shared_ptr<UiElement> root;
     };

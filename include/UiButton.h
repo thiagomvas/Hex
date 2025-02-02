@@ -14,8 +14,8 @@ class UiButton : public UiElement {
     Color textColor;
     std::string text;
 
-    void Draw() override;
-    void Update() override;
+    void draw() override;
+    void update() override;
 
     void (*OnClick)(UiButton*);
 };

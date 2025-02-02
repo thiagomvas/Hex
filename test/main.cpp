@@ -13,7 +13,7 @@ void OnClick(Hex::UiButton* btn) {
 }
 
 int main(int argc, char **argv) {
-  auto window = Hex::Init(argc, argv);
+  auto window = Hex::init(argc, argv);
 
   auto btn = Hex::createButton({10, 10}, {100, 50}, RED, WHITE, "Click me!");
   btn->OnClick = OnClick;
@@ -25,12 +25,12 @@ int main(int argc, char **argv) {
   root->AddChild(btn);
   root->AddChild(btn2);
 
-  Hex::AddUiElement(root);
+  Hex::addUiElement(root);
 
   while (!WindowShouldClose()) {
-    Hex::Update();
+    Hex::update();
   }
-  Hex::Dispose();
+  Hex::dispose();
 
 
   return 0;

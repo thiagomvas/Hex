@@ -1,15 +1,15 @@
 #include "UiContainer.h"
 
 namespace Hex {
-    void UiContainer::Draw() {
+    void UiContainer::draw() {
         for (const auto& child : children) {
-            child->Draw();
+            child->draw();
         }
     }
 
-    void UiContainer::Update() {
+    void UiContainer::update() {
         for (const auto& child : children) {
-            child->Update();
+            child->update();
         }
     }
 

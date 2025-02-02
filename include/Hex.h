@@ -15,12 +15,12 @@ static std::shared_ptr<HexWindow> hexWindow;
     static std::shared_ptr<UiManager> uiManager;
 
 
-    std::shared_ptr<HexWindow> Init(int argc, char **argv);
-    void Update();
-    bool IsRunning();
-    void Dispose();
+    std::shared_ptr<HexWindow> init(int argc, char **argv);
+    void update();
+    bool isRunning();
+    void dispose();
 
-    void AddUiElement(std::shared_ptr<UiElement> element);
+    void addUiElement(std::shared_ptr<UiElement> element);
 
 
 

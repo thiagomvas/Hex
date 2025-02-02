@@ -1,12 +1,12 @@
 #include "UiButton.h"
 
 namespace Hex {
-    void UiButton::Draw() {
+    void UiButton::draw() {
         DrawRectangle(position.x, position.y, size.x, size.y, color);
         DrawText(text.c_str(), position.x, position.y, 20, textColor);
     }
 
-    void UiButton::Update() {
+    void UiButton::update() {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             auto mouse = GetMousePosition();
             if (mouse.x >= position.x && mouse.x <= position.x + size.x &&

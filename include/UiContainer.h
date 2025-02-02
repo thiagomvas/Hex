@@ -10,8 +10,8 @@
 namespace Hex {
     class UiContainer : public UiElement {
     public:
-        void Draw() override;
-        void Update() override;
+        void draw() override;
+        void update() override;
         void AddChild(std::shared_ptr<UiElement> child);
     };
 }

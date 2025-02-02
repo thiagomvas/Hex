@@ -26,7 +26,7 @@ namespace Hex {
 
     }
 
-    std::shared_ptr<HexWindow> Init(int argc, char **argv) {
+    std::shared_ptr<HexWindow> init(int argc, char **argv) {
         // Initialize hexWindow here
         hexWindow = std::make_shared<HexWindow>();
         uiManager = std::make_shared<UiManager>();
@@ -56,11 +56,11 @@ namespace Hex {
         return hexWindow;
     }
 
-    bool IsRunning() {
+    bool isRunning() {
         return !WindowShouldClose();
     }
 
-    void Update() {
+    void update() {
         if (!hexWindow->active)
             return;
 
@@ -70,23 +70,23 @@ namespace Hex {
 
         BeginDrawing();
         ClearBackground(BLACK);
-        uiManager->Update();
-        uiManager->Draw();
+        uiManager->update();
+        uiManager->draw();
         EndDrawing();
 
     }
 
-    void Dispose() {
+    void dispose() {
 
       logger->logInfo("Disposing Hex", __FILE__, __LINE__, __FUNCTION__);
         CloseWindow();
         hexWindow.reset();
-        uiManager->Dispose();
+        uiManager->dispose();
 
         logger->logInfo("Hex disposed", __FILE__, __LINE__, __FUNCTION__);
     }
 
-    void AddUiElement(std::shared_ptr<UiElement> element) {
-        uiManager->AddElement(element);
+    void addUiElement(std::shared_ptr<UiElement> element) {
+        uiManager->addElement(element);
     }
 }

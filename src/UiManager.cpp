@@ -6,7 +6,7 @@
 #include "UiContainer.h"
 
 namespace Hex {
-    void UiManager::Init() {
+    void UiManager::init() {
       if(root == nullptr) {
         root = std::make_shared<UiContainer>();
         }
@@ -16,19 +16,19 @@ namespace Hex {
         root->visible = true;
     }
 
-    void UiManager::Update() {
-      root->Update();
+    void UiManager::update() {
+      root->update();
     }
 
-    void UiManager::Draw() {
-        root->Draw();
+    void UiManager::draw() {
+        root->draw();
     }
 
-    void UiManager::Dispose() {
+    void UiManager::dispose() {
         root->children.clear();
     }
 
-    void UiManager::AddElement(std::shared_ptr<UiElement> element) {
+    void UiManager::addElement(std::shared_ptr<UiElement> element) {
       if(root == nullptr) {
         root = element;
       } else {
@@ -36,7 +36,7 @@ namespace Hex {
         }
     }
 
-    void UiManager::Clear() {
+    void UiManager::clear() {
         root->children.clear();
     }
 }

@@ -11,8 +11,8 @@ namespace Hex {
     Vector2 size;
     bool visible;
 
-    virtual void Draw() = 0;
-    virtual void Update() = 0;
+    virtual void draw() = 0;
+    virtual void update() = 0;
 
     std::vector<std::shared_ptr<UiElement>> children;
   };
