@@ -29,7 +29,7 @@ namespace Hex {
     std::shared_ptr<HexWindow> Init(int argc, char **argv) {
         // Initialize hexWindow here
         hexWindow = std::make_shared<HexWindow>();
-
+        uiManager = std::make_shared<UiManager>();
         logger = std::make_shared<Logger>(&std::cout);
 
         // Log args
@@ -57,17 +57,22 @@ namespace Hex {
     }
 
     bool IsRunning() {
-        return hexWindow->active;
+        return !WindowShouldClose();
     }
 
     void Update() {
         if (!hexWindow->active)
             return;
 
-
           if(WindowShouldClose()) {
             hexWindow->active = false;
           }
+
+        BeginDrawing();
+        ClearBackground(BLACK);
+        uiManager->Update();
+        uiManager->Draw();
+        EndDrawing();
 
     }
 
@@ -75,9 +80,13 @@ namespace Hex {
 
       logger->logInfo("Disposing Hex", __FILE__, __LINE__, __FUNCTION__);
         CloseWindow();
-        hexWindow->active = false;
         hexWindow.reset();
+        uiManager->Dispose();
 
         logger->logInfo("Hex disposed", __FILE__, __LINE__, __FUNCTION__);
+    }
+
+    void AddUiElement(std::shared_ptr<UiElement> element) {
+        uiManager->AddElement(element);
     }
 }

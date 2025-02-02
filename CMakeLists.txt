@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.30)
 project(Hex)
 
 set(CMAKE_CXX_STANDARD 26)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Hide Warnings
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
