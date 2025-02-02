@@ -1,4 +1,3 @@
-
 #include "Hex.h"
 #include "HexWindow.h"
 #include "HexInitArgs.h"
@@ -7,9 +6,34 @@
 
 namespace Hex {
 
+    void RaylibLogToLogger(int msgType, const char* text, va_list args) {
+        auto level = "INFO";
+        switch (msgType) {
+            case LOG_INFO:
+                level = "INFO";
+                break;
+            case LOG_ERROR:
+                level = "ERROR";
+                break;
+            case LOG_WARNING:
+                level = "WARNING";
+                break;
+            case LOG_DEBUG:
+                level = "DEBUG";
+                break;
+        }
+        logger->log(text, level, "libraylib", 0, "RaylibLogAdapter");
+
+    }
+
     std::shared_ptr<HexWindow> Init(int argc, char **argv) {
         // Initialize hexWindow here
         hexWindow = std::make_shared<HexWindow>();
+
+        logger = std::make_shared<Logger>(&std::cout);
+
+        // Log args
+        logger->logInfo("Initializing Hex", __FILE__, __LINE__, __FUNCTION__);
 
         auto args = parseArgs(argc, argv);
         hexWindow->width = args.width;
@@ -17,15 +41,17 @@ namespace Hex {
         hexWindow->title = args.title;
         hexWindow->fullscreen = args.fullscreen;
 
-        InitWindow(hexWindow->width, hexWindow->height, hexWindow->title);
+        SetTraceLogCallback(RaylibLogToLogger);
 
-        SetExitKey(0);
+        InitWindow(hexWindow->width, hexWindow->height, hexWindow->title);
 
         hexWindow->active = true;
 
         if (hexWindow->fullscreen) {
             ToggleFullscreen();
         }
+
+        logger->logInfo("Hex initialized", __FILE__, __LINE__, __FUNCTION__);
 
         return hexWindow;
     }
@@ -35,16 +61,23 @@ namespace Hex {
     }
 
     void Update() {
-        if (hexWindow->active) {
+        if (!hexWindow->active)
+            return;
+
+
           if(WindowShouldClose()) {
             hexWindow->active = false;
           }
-        }
+
     }
 
     void Dispose() {
+
+      logger->logInfo("Disposing Hex", __FILE__, __LINE__, __FUNCTION__);
         CloseWindow();
         hexWindow->active = false;
         hexWindow.reset();
+
+        logger->logInfo("Hex disposed", __FILE__, __LINE__, __FUNCTION__);
     }
 }
