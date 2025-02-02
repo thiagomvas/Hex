@@ -3,27 +3,29 @@
 #include "HexInitArgs.h"
 #include <memory>
 #include "raylib.h"
-
 namespace Hex {
 
     void RaylibLogToLogger(int msgType, const char* text, va_list args) {
+        char formattedMessage[256];
+        vsnprintf(formattedMessage, sizeof(formattedMessage), text, args);
+
         auto level = "INFO";
         switch (msgType) {
             case LOG_INFO:
                 level = "INFO";
-                break;
+            break;
             case LOG_ERROR:
                 level = "ERROR";
-                break;
+            break;
             case LOG_WARNING:
                 level = "WARNING";
-                break;
+            break;
             case LOG_DEBUG:
                 level = "DEBUG";
-                break;
+            break;
         }
-        logger->log(text, level, "libraylib", 0, "RaylibLogAdapter");
 
+        logger->log(formattedMessage, level, "libraylib", 0, "RaylibLogAdapter");
     }
 
     std::shared_ptr<HexWindow> init(int argc, char **argv) {
