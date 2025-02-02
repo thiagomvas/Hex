@@ -8,6 +8,8 @@ struct HexWindow {
   int height;
   const char *title;
   bool fullscreen;
+
+  bool active;
   };
 };
 

@@ -11,6 +11,10 @@ static std::shared_ptr<HexWindow> hexWindow;
 
 
     std::shared_ptr<HexWindow> Init(int argc, char **argv);
+    void Update();
+    bool IsRunning();
+
+    void Dispose();
 }
 
 #endif //HEX_H
