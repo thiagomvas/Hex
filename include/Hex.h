@@ -13,8 +13,10 @@ namespace Hex {
 static std::shared_ptr<HexWindow> hexWindow;
     static std::shared_ptr<Logger> logger;
     static std::shared_ptr<UiManager> uiManager;
+    static std::shared_ptr<UiElement> customDecorator = nullptr;
 
     static MouseCursor currentCursor;
+
 
 
 
@@ -26,6 +28,7 @@ static std::shared_ptr<HexWindow> hexWindow;
     void setCurrentCursor(MouseCursor cursor);
 
     void addUiElement(std::shared_ptr<UiElement> element);
+    void setDecorator(std::shared_ptr<UiElement> decorator);
 
 
 

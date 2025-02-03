@@ -48,6 +48,13 @@ namespace Hex {
         SetTraceLogCallback(RaylibLogToLogger);
 
         SetConfigFlags(ConfigFlags::FLAG_WINDOW_RESIZABLE | ConfigFlags::FLAG_WINDOW_ALWAYS_RUN);
+
+        if (customDecorator != nullptr) {
+            logger->logInfo("Custom decorator found", __FILE__, __LINE__, __FUNCTION__);
+            SetConfigFlags(FLAG_WINDOW_UNDECORATED | ConfigFlags::FLAG_BORDERLESS_WINDOWED_MODE);
+
+        }
+
         InitWindow(hexWindow->width, hexWindow->height, hexWindow->title);
 
         SetTargetFPS(30);
@@ -81,6 +88,10 @@ namespace Hex {
         ClearBackground(BLACK);
         uiManager->update();
         uiManager->draw();
+        if (customDecorator != nullptr) {
+            customDecorator->update();
+            customDecorator->draw();
+        }
         EndDrawing();
 
         SetMouseCursor(currentCursor);
@@ -94,6 +105,10 @@ namespace Hex {
         hexWindow.reset();
         uiManager->dispose();
 
+        uiManager.reset();
+        logger.reset();
+        customDecorator.reset();
+
         logger->logInfo("Hex disposed", __FILE__, __LINE__, __FUNCTION__);
     }
 
@@ -103,5 +118,9 @@ namespace Hex {
 
     void addUiElement(std::shared_ptr<UiElement> element) {
         uiManager->addElement(element);
+    }
+
+    void setDecorator(std::shared_ptr<UiElement> decorator) {
+        customDecorator = decorator;
     }
 }
