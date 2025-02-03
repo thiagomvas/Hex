@@ -1,5 +1,7 @@
 #include "UiButton.h"
 
+#include <Hex.h>
+
 namespace Hex {
     void UiButton::draw() {
         DrawRectangle(position.x, position.y, size.x, size.y, color);
@@ -7,10 +9,12 @@ namespace Hex {
     }
 
     void UiButton::update() {
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            auto mouse = GetMousePosition();
-            if (mouse.x >= position.x && mouse.x <= position.x + size.x &&
-                mouse.y >= position.y && mouse.y <= position.y + size.y) {
+        auto mouse = GetMousePosition();
+        if (mouse.x >= position.x && mouse.x <= position.x + size.x &&
+            mouse.y >= position.y && mouse.y <= position.y + size.y) {
+            setCurrentCursor(MOUSE_CURSOR_POINTING_HAND);
+
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                 OnClick(this);
             }
         }

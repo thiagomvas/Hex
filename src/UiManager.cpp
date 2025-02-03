@@ -17,6 +17,7 @@ namespace Hex {
     }
 
     void UiManager::update() {
+
       root->update();
     }
 

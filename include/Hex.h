@@ -14,11 +14,16 @@ static std::shared_ptr<HexWindow> hexWindow;
     static std::shared_ptr<Logger> logger;
     static std::shared_ptr<UiManager> uiManager;
 
+    static MouseCursor currentCursor;
+
+
+
 
     std::shared_ptr<HexWindow> init(int argc, char **argv);
     void update();
     bool isRunning();
     void dispose();
+    void setCurrentCursor(MouseCursor cursor);
 
     void addUiElement(std::shared_ptr<UiElement> element);
 

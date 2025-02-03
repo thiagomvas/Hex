@@ -25,6 +25,8 @@ namespace Hex {
             break;
         }
 
+
+
         logger->log(formattedMessage, level, "libraylib", 0, "RaylibLogAdapter");
     }
 
@@ -45,7 +47,10 @@ namespace Hex {
 
         SetTraceLogCallback(RaylibLogToLogger);
 
+        SetConfigFlags(ConfigFlags::FLAG_WINDOW_RESIZABLE | ConfigFlags::FLAG_WINDOW_ALWAYS_RUN);
         InitWindow(hexWindow->width, hexWindow->height, hexWindow->title);
+
+        SetTargetFPS(30);
 
         hexWindow->active = true;
 
@@ -66,15 +71,19 @@ namespace Hex {
         if (!hexWindow->active)
             return;
 
-          if(WindowShouldClose()) {
-            hexWindow->active = false;
-          }
+        if(WindowShouldClose()) {
+          hexWindow->active = false;
+        }
+
+        setCurrentCursor(MOUSE_CURSOR_ARROW);
 
         BeginDrawing();
         ClearBackground(BLACK);
         uiManager->update();
         uiManager->draw();
         EndDrawing();
+
+        SetMouseCursor(currentCursor);
 
     }
 
@@ -86,6 +95,10 @@ namespace Hex {
         uiManager->dispose();
 
         logger->logInfo("Hex disposed", __FILE__, __LINE__, __FUNCTION__);
+    }
+
+    void setCurrentCursor(MouseCursor cursor) {
+        currentCursor = cursor;
     }
 
     void addUiElement(std::shared_ptr<UiElement> element) {
